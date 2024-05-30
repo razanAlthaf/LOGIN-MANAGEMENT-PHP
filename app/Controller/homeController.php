@@ -15,6 +15,10 @@ class HomeController
     {
         echo "HomeController.world()";
     }
+    function about(): void
+    {
+        echo "Hello, Razan althaf subrata";
+    }
 }
 
 ?>
