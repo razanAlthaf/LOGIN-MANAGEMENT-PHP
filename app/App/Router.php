@@ -32,8 +32,10 @@ class Router
                 $function = $route["function"];
                 
                 $controller = new $route["controller"];
-                $controller->$function();
+                // $controller->$function();
 
+                array_shift($variables);
+                call_user_func_array([$controller, $function], $variables);
 
                 return;
             }

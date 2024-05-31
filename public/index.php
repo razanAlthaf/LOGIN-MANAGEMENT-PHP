@@ -20,6 +20,9 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 use Razan\belajar\php\mvc\App\Router;
 use Razan\belajar\php\mvc\Controller\HomeController;
+use Razan\belajar\php\mvc\Controller\ProductController;
+
+Router::add('GET', '/products/([0-9]*)/categories/([a-zA-Z]*)', ProductController::class, 'categories');
 
 Router::add('GET', '/', HomeController::class, 'index');
 Router::add('GET', '/hello', HomeController::class, 'hello');
