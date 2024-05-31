@@ -1,11 +1,17 @@
 <?php 
 namespace Razan\belajar\php\mvc\Controller;
 
+use Razan\belajar\php\mvc\App\View;
 class HomeController
 {
     function index(): void
     {
-        echo "HomeController.Index()";
+        $model = [
+            "title" => "Belajar php seru",
+            "content" => "demi ukom kita ngebut belajar php"
+        ];
+        
+        View::render("Home/index", $model);
     }
     function hello(): void
     {
