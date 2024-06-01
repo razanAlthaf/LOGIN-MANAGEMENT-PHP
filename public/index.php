@@ -19,8 +19,18 @@
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use Razan\belajar\php\mvc\App\Router;
+use Razan\belajar\php\mvc\Config\Database;
 use Razan\belajar\php\mvc\Controller\HomeController;
+use Razan\belajar\php\mvc\Controller\UserController;
 
+
+Database::getConnection('prod');
+
+// Home Controller
 Router::add('GET', '/', HomeController::class, 'index', []);
+
+// User Controller
+Router::add('GET', '/users/register', UserController::class, 'register', []);
+Router::add('POST', '/users/register', UserController::class, 'postRegister', []);
 
 Router::run();
