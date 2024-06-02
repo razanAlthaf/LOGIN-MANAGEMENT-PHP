@@ -8,6 +8,7 @@ use Razan\belajar\php\mvc\Service\UserService;
 use Razan\belajar\php\mvc\Repository\UserRepository;
 use Razan\belajar\php\mvc\Model\UserRegisterRequest;
 use Razan\belajar\php\mvc\Exception\ValidationException;
+use Razan\belajar\php\mvc\Model\UserLoginRequest;
 
 class UserController
 {
@@ -41,6 +42,30 @@ class UserController
         } catch (ValidationException $exception) {
             View::render("User/register", [
                 "title" => "Register New User",
+                "error" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function login()
+    {
+        View::render("User/login", [
+            "title" => "Login user"
+        ]);
+    }
+
+    public function postLogin()
+    {
+        $request = new UserLoginRequest();
+        $request->id = $_POST['id'];
+        $request->password = $_POST['password'];
+
+        try {
+            $this->userService->login($request);
+            View::redirect("/");
+        } catch (ValidationException $exception) {
+            View::render("User/login", [
+                "title" => "Login user",
                 "error" => $exception->getMessage()
             ]);
         }
