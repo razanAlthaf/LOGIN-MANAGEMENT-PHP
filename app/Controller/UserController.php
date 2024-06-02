@@ -9,16 +9,21 @@ use Razan\belajar\php\mvc\Repository\UserRepository;
 use Razan\belajar\php\mvc\Model\UserRegisterRequest;
 use Razan\belajar\php\mvc\Exception\ValidationException;
 use Razan\belajar\php\mvc\Model\UserLoginRequest;
-
+use Razan\belajar\php\mvc\Service\SessionService;
+use Razan\belajar\php\mvc\Repository\SessionRepository;
 class UserController
 {
     private UserService $userService;
+    private SessionService $sessionService;
 
     public function __construct()
     {
         $connection = Database::getConnection();
         $userRepository = new UserRepository($connection);
         $this->userService = new UserService($userRepository);
+
+        $sessionRepository = new SessionRepository($connection);
+        $this->sessionService = new SessionService($sessionRepository, $userRepository);
     }
 
 
@@ -61,7 +66,8 @@ class UserController
         $request->password = $_POST['password'];
 
         try {
-            $this->userService->login($request);
+            $response = $this->userService->login($request);
+            $this->sessionService->create($response->user->id);
             View::redirect("/");
         } catch (ValidationException $exception) {
             View::render("User/login", [
