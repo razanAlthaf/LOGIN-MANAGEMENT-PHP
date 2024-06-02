@@ -8,6 +8,8 @@ use Razan\belajar\php\mvc\Repository\UserRepository;
 use Razan\belajar\php\mvc\Exception\ValidationException;
 use Razan\belajar\php\mvc\Domain\User;
 use Razan\belajar\php\mvc\Config\Database;
+use Razan\belajar\php\mvc\Model\UserLoginRequest;
+use Razan\belajar\php\mvc\Model\UserLoginResponse;
 
 
 class UserService
@@ -51,6 +53,31 @@ class UserService
         if($request->id == null || $request->name == null || $request->password == null ||
         trim($request->id) == "" || trim($request->name) == "" || trim($request->password) == ""){
             throw new ValidationException("Id, Name, Password Can't Blank");
+        }
+    }
+
+    public function login(UserLoginRequest $request) : UserLoginResponse
+    {
+        $this->validateUserLoginRequest($request);
+
+        $user = $this->userRepository->findById($request->id);
+        if($user == null){
+            throw new ValidationException("Id or password is wrong");
+        }
+
+        if(password_verify($request->password, $user->password)){
+            $response = new UserLoginResponse();
+            $response->user = $user;
+            return $response;
+        }else {
+            throw new ValidationException("Id or password is wrong");
+        }
+    }
+
+    private function validateUserLoginRequest(UserLoginRequest $request){
+        if($request->id == null || $request->password == null ||
+        trim($request->id) == "" || trim($request->password) == ""){
+            throw new ValidationException("Id, Password Can't Blank");
         }
     }
 }

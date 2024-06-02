@@ -9,6 +9,7 @@ use Razan\belajar\php\mvc\Model\UserRegisterRequest;
 use Razan\belajar\php\mvc\Service\UserService;
 use Razan\belajar\php\mvc\Exception\ValidationException;
 use Razan\belajar\php\mvc\Domain\User;
+use Razan\belajar\php\mvc\Model\UserLoginRequest;
 
 
 class UserServiceTest extends TestCase
@@ -70,4 +71,51 @@ class UserServiceTest extends TestCase
 
         $this->userService->register($request);
     }
+
+    public function testLoginNotfound(): void
+    {
+        $this->expectException(ValidationException::class);
+        $request = new UserLoginRequest();
+        $request->id = 'razan';
+        $request->password = 'rahasia';
+
+        $this->userService->login($request);
+    }
+
+    public function testLoginWrongPassword(): void
+    {
+        $user = new User();
+        $user->id = 'razan';
+        $user->name = 'Razan';
+        $user->password = password_hash('rahasia', PASSWORD_BCRYPT);
+
+        $this->expectException(ValidationException::class);
+
+        $request = new UserLoginRequest();
+        $request->id = 'razan';
+        $request->password = 'salah';
+
+        $this->userService->login($request);
+    }
+
+    public function testLoginSuccess(): void
+    {
+        $user = new User();
+        $user->id = 'razan';
+        $user->name = 'Razan';
+        $user->password = password_hash('rahasia', PASSWORD_BCRYPT);
+
+        $this->expectException(ValidationException::class);
+
+        $request = new UserLoginRequest();
+        $request->id = 'razan';
+        $request->password = 'rahasia';
+
+        $response = $this->userService->login($request);
+
+        self::assertEquals($request->id, $response->user->id);
+        self::assertTrue(password_verify($request->password, $response->user->password));
+
+    }
+    
 }
