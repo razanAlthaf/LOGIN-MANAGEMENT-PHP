@@ -12,6 +12,8 @@ use Razan\belajar\php\mvc\Model\UserLoginRequest;
 use Razan\belajar\php\mvc\Model\UserLoginResponse;
 use Razan\belajar\php\mvc\Model\UserUpdateProfileRequest;
 use Razan\belajar\php\mvc\Model\UserUpdateProfileResponse;
+use Razan\belajar\php\mvc\Model\UserUpdatePasswordRequest;
+use Razan\belajar\php\mvc\Model\UserUpdatePasswordResponse;
 
 
 class UserService
@@ -113,6 +115,42 @@ class UserService
         if($request->id == null || $request->name == null ||
         trim($request->id) == "" || trim($request->name) == ""){
             throw new ValidationException("Id, Name Can't Blank");
+        }
+    }
+
+    public function updatePassword(UserUpdatePasswordRequest $request) : UserUpdatePasswordResponse
+    {
+        $this->validateUserUpdatePasswordRequest($request);
+
+        try {
+            Database::beginTransaction();
+            $user = $this->userRepository->findById($request->id);
+            if($user == null){
+                throw new ValidationException("User Not Found");
+            }
+    
+            if(!password_verify($request->oldPassword, $user->password)){
+                throw new ValidationException("Old Password is Wrong");
+            }
+    
+            $user->password = password_hash($request->newPassword, PASSWORD_BCRYPT);
+            $this->userRepository->update($user);
+    
+            Database::commitTransaction();
+
+            $response = new UserUpdatePasswordResponse();
+            $response->user = $user;
+            return $response;
+            } catch (\Exception $exception) {
+                Database::rollbackTransaction();
+                throw $exception;
+        }
+    }
+
+    private function validateUserUpdatePasswordRequest(UserUpdatePasswordRequest $request){
+        if($request->id == null || $request->oldPassword == null || $request->newPassword == null ||
+        trim($request->id) == "" || trim($request->oldPassword) == "" || trim($request->newPassword) == ""){
+            throw new ValidationException("Id, Old Password, New Password Can't Blank");
         }
     }
 }

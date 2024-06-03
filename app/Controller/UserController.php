@@ -12,6 +12,8 @@ use Razan\belajar\php\mvc\Model\UserLoginRequest;
 use Razan\belajar\php\mvc\Service\SessionService;
 use Razan\belajar\php\mvc\Repository\SessionRepository;
 use Razan\belajar\php\mvc\Model\UserUpdateProfileRequest;
+use Razan\belajar\php\mvc\Model\UserUpdatePasswordRequest;
+
 
 class UserController
 {
@@ -114,6 +116,42 @@ class UserController
                 "user" => [
                     "id" => $user->id,
                     "name" => $_POST['name']
+                ],
+                "error" => $exception->getMessage()
+            ]);
+        }
+    }
+
+    public function updatePassword()
+    {
+        $user = $this->sessionService->current();
+        View::render("User/password", [
+            "title" => "Update user password",
+            "user" => [
+                "id" => $user->id,
+                "name" => $user->name
+            ]
+        ]);
+    }
+
+    public function postUpdatePassword()
+    {
+        $user = $this->sessionService->current();
+
+        $request = new UserUpdatePasswordRequest();
+        $request->id = $user->id;
+        $request->oldPassword = $_POST['oldPassword'];
+        $request->newPassword = $_POST['newPassword'];
+
+        try {
+            $this->userService->updatePassword($request);
+            View::redirect("/");
+        } catch (ValidationException $exception) {
+            View::render("User/password", [
+                "title" => "Update user password",
+                "user" => [
+                    "id" => $user->id,
+                    "name" => $user->name
                 ],
                 "error" => $exception->getMessage()
             ]);
