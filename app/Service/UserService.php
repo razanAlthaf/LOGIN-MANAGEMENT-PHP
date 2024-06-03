@@ -10,6 +10,8 @@ use Razan\belajar\php\mvc\Domain\User;
 use Razan\belajar\php\mvc\Config\Database;
 use Razan\belajar\php\mvc\Model\UserLoginRequest;
 use Razan\belajar\php\mvc\Model\UserLoginResponse;
+use Razan\belajar\php\mvc\Model\UserUpdateProfileRequest;
+use Razan\belajar\php\mvc\Model\UserUpdateProfileResponse;
 
 
 class UserService
@@ -78,6 +80,39 @@ class UserService
         if($request->id == null || $request->password == null ||
         trim($request->id) == "" || trim($request->password) == ""){
             throw new ValidationException("Id, Password Can't Blank");
+        }
+    }
+
+    public function updateProfile(UserUpdateProfileRequest $request): UserUpdateProfileResponse
+    {
+        $this->validateUserUpdateProfileRequest($request);
+        
+
+        try {
+            Database::beginTransaction();
+            $user = $this->userRepository->findById($request->id);
+            if($user == null){
+                throw new ValidationException("User Not Found");
+            }
+    
+            $user->name = $request->name;
+            $this->userRepository->update($user);
+    
+            Database::commitTransaction();
+
+            $response = new UserUpdateProfileResponse();
+            $response->user = $user;
+            return $response;
+            } catch (\Exception $exception) {
+                Database::rollbackTransaction();
+                throw $exception;
+        }
+    }
+
+    private function validateUserUpdateProfileRequest(UserUpdateProfileRequest $request){
+        if($request->id == null || $request->name == null ||
+        trim($request->id) == "" || trim($request->name) == ""){
+            throw new ValidationException("Id, Name Can't Blank");
         }
     }
 }

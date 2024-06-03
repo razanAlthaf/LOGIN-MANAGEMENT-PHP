@@ -11,6 +11,8 @@ use Razan\belajar\php\mvc\Exception\ValidationException;
 use Razan\belajar\php\mvc\Model\UserLoginRequest;
 use Razan\belajar\php\mvc\Service\SessionService;
 use Razan\belajar\php\mvc\Repository\SessionRepository;
+use Razan\belajar\php\mvc\Model\UserUpdateProfileRequest;
+
 class UserController
 {
     private UserService $userService;
@@ -81,5 +83,40 @@ class UserController
     {
         $this->sessionService->destroy();
         View::redirect("/");
+    }
+
+    public function updateProfile()
+    {
+        $user = $this->sessionService->current();
+        View::render("User/profile", [
+            "title" => "Update user profile",
+            "user" => [
+                "id" => $user->id,
+                "name" => $user->name
+            ]
+        ]);
+    }
+
+    public function postUpdateProfile()
+    {
+        $user = $this->sessionService->current();
+
+        $request = new UserUpdateProfileRequest();
+        $request->id = $user->id;
+        $request->name = $_POST['name'];
+
+        try {
+            $response = $this->userService->updateProfile($request);
+            View::redirect("/");
+        } catch (ValidationException $exception) {
+            View::render("User/profile", [
+                "title" => "Update user profile",
+                "user" => [
+                    "id" => $user->id,
+                    "name" => $_POST['name']
+                ],
+                "error" => $exception->getMessage()
+            ]);
+        }
     }
 }
