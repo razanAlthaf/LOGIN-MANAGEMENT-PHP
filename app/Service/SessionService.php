@@ -1,11 +1,11 @@
 <?php
 
-namespace Razan\belajar\php\mvc\Service;
+namespace Razan\Service;
 
-use Razan\belajar\php\mvc\Domain\Session;
-use Razan\belajar\php\mvc\Domain\User;
-use Razan\belajar\php\mvc\Repository\SessionRepository;
-use Razan\belajar\php\mvc\Repository\UserRepository;
+use Razan\Domain\Session;
+use Razan\Domain\User;
+use Razan\Repository\SessionRepository;
+use Razan\Repository\UserRepository;
 
 class SessionService
 {

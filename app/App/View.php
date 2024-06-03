@@ -1,6 +1,6 @@
 <?php 
 
-namespace Razan\belajar\php\mvc\App;
+namespace Razan\App;
 class View {
 
     public static function render(string $view, $model)

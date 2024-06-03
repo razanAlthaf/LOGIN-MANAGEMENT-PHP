@@ -1,6 +1,6 @@
 <?php 
 
-namespace Razan\belajar\php\mvc\Config;
+namespace Razan\Config;
 
 class Database
 {

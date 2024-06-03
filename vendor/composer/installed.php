@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'razan/learnphpmvc',
+        'name' => 'razan/php-mvc-login-management',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'cde0a3b59e9def8f7f99461a21da26dff7925a7a',
+        'reference' => 'c1c2de33ebbf732223ab7a40d5d4b528c9477e76',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -109,10 +109,10 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'razan/learnphpmvc' => array(
+        'razan/php-mvc-login-management' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'cde0a3b59e9def8f7f99461a21da26dff7925a7a',
+            'reference' => 'c1c2de33ebbf732223ab7a40d5d4b528c9477e76',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

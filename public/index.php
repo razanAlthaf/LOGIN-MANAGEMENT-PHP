@@ -18,12 +18,12 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use Razan\belajar\php\mvc\App\Router;
-use Razan\belajar\php\mvc\Config\Database;
-use Razan\belajar\php\mvc\Controller\HomeController;
-use Razan\belajar\php\mvc\Controller\UserController;
-use Razan\belajar\php\mvc\Middleware\MustNotLoginMiddleware;
-use Razan\belajar\php\mvc\Middleware\MustLoginMiddleware;
+use Razan\App\Router;
+use Razan\Config\Database;
+use Razan\Controller\HomeController;
+use Razan\Controller\UserController;
+use Razan\Middleware\MustNotLoginMiddleware;
+use Razan\Middleware\MustLoginMiddleware;
 
 
 Database::getConnection('prod');

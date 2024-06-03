@@ -1,8 +1,8 @@
 <?php
 
-namespace Razan\belajar\php\mvc\Repository;
+namespace Razan\Repository;
 
-use Razan\belajar\php\mvc\Domain\Session;
+use Razan\Domain\Session;
 
 class SessionRepository
 {

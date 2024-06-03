@@ -1,11 +1,11 @@
 <?php 
-namespace Razan\belajar\php\mvc\Controller;
+namespace Razan\Controller;
 
-use Razan\belajar\php\mvc\App\View;
-use Razan\belajar\php\mvc\Config\Database;
-use Razan\belajar\php\mvc\Service\SessionService;
-use Razan\belajar\php\mvc\Repository\SessionRepository;
-use Razan\belajar\php\mvc\Repository\UserRepository;
+use Razan\App\View;
+use Razan\Config\Database;
+use Razan\Service\SessionService;
+use Razan\Repository\SessionRepository;
+use Razan\Repository\UserRepository;
 
 class HomeController
 {

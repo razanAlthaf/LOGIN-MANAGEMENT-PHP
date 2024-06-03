@@ -1,6 +1,6 @@
 <?php 
 
-namespace Razan\belajar\php\mvc\Middleware;
+namespace Razan\Middleware;
 
 interface Middleware
 {

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Razan\belajar\php\mvc\Exception;
+namespace Razan\Exception;
 
 class ValidationException extends \Exception
     {

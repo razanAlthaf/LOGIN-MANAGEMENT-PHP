@@ -1,6 +1,6 @@
 <?php
 
-namespace Razan\belajar\php\mvc\Domain;
+namespace Razan\Domain;
 
 class Session
 {

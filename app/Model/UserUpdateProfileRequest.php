@@ -1,6 +1,6 @@
 <?php
 
-namespace Razan\belajar\php\mvc\Model;
+namespace Razan\Model;
 
 class UserUpdateProfileRequest
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Razan\belajar\php\mvc\Model;
+namespace Razan\Model;
 
-use Razan\belajar\php\mvc\Domain\User;
+use Razan\Domain\User;
 
 class UserRegisterResponse
 {

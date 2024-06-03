@@ -1,12 +1,12 @@
 <?php
 
-namespace Razan\belajar\php\mvc\Middleware;
+namespace Razan\Middleware;
 
-use Razan\belajar\php\mvc\App\View;
-use Razan\belajar\php\mvc\Config\Database;
-use Razan\belajar\php\mvc\Repository\SessionRepository;
-use Razan\belajar\php\mvc\Repository\UserRepository;
-use Razan\belajar\php\mvc\Service\SessionService;
+use Razan\App\View;
+use Razan\Config\Database;
+use Razan\Repository\SessionRepository;
+use Razan\Repository\UserRepository;
+use Razan\Service\SessionService;
 
 
 class MustNotLoginMiddleware implements Middleware

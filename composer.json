@@ -1,6 +1,6 @@
 {
-    "name": "razan/learnphpmvc",
-    "description": "belajar php mvc",
+    "name": "razan/php-mvc-login-management",
+    "description": "project login management",
     "type": "project",
     "authors": [
         {
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Razan\\belajar\\php\\mvc\\": "app"
+            "Razan\\": "app"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Razan\\belajar\\php\\mvc\\": "tests"
+            "Razan\\": "tests"
         }
     }
 }

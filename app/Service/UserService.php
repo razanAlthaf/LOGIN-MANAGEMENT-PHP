@@ -1,19 +1,19 @@
 <?php
 
-namespace Razan\belajar\php\mvc\Service;
+namespace Razan\Service;
 
-use Razan\belajar\php\mvc\Model\UserRegisterRequest;
-use Razan\belajar\php\mvc\Model\UserRegisterResponse;
-use Razan\belajar\php\mvc\Repository\UserRepository;
-use Razan\belajar\php\mvc\Exception\ValidationException;
-use Razan\belajar\php\mvc\Domain\User;
-use Razan\belajar\php\mvc\Config\Database;
-use Razan\belajar\php\mvc\Model\UserLoginRequest;
-use Razan\belajar\php\mvc\Model\UserLoginResponse;
-use Razan\belajar\php\mvc\Model\UserUpdateProfileRequest;
-use Razan\belajar\php\mvc\Model\UserUpdateProfileResponse;
-use Razan\belajar\php\mvc\Model\UserUpdatePasswordRequest;
-use Razan\belajar\php\mvc\Model\UserUpdatePasswordResponse;
+use Razan\Model\UserRegisterRequest;
+use Razan\Model\UserRegisterResponse;
+use Razan\Repository\UserRepository;
+use Razan\Exception\ValidationException;
+use Razan\Domain\User;
+use Razan\Config\Database;
+use Razan\Model\UserLoginRequest;
+use Razan\Model\UserLoginResponse;
+use Razan\Model\UserUpdateProfileRequest;
+use Razan\Model\UserUpdateProfileResponse;
+use Razan\Model\UserUpdatePasswordRequest;
+use Razan\Model\UserUpdatePasswordResponse;
 
 
 class UserService
